@@ -19,8 +19,8 @@ from typing import Optional
 
 import humps
 
-from hsfs import engine
-from hsfs.core import storage_connector_api
+from python.hsfs import engine
+from python.hsfs.core import storage_connector_api
 
 
 class StorageConnector(ABC):
@@ -937,8 +937,8 @@ class GcsConnector(StorageConnector):
         self,
         id,
         name,
-        description,
         featurestore_id,
+        description=None,
         # members specific to type of connector
         key_path=None,
         bucket=None,

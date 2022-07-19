@@ -14,19 +14,15 @@
 #   limitations under the License.
 #
 
-import os
-import sys
 import unittest
 from requests import Session
 from unittest.mock import Mock
 from unittest.mock import patch
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from hsfs import client
-from hsfs import engine
-from hsfs.core.storage_connector_api import StorageConnectorApi
-from hsfs.storage_connector import (
+from python.hsfs import client
+from python.hsfs import engine
+from python.hsfs.core.storage_connector_api import StorageConnectorApi
+from python.hsfs.storage_connector import (
     StorageConnector,
     HopsFSConnector,
     S3Connector,
@@ -53,7 +49,7 @@ class TestHopsFSConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -115,7 +111,7 @@ class TestHopsFSConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = HopsFSConnector(1, "sc", 99)
+            sc = HopsFSConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -149,7 +145,7 @@ class TestHopsFSConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = HopsFSConnector(1, "sc", 99)
+            sc = HopsFSConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -246,7 +242,7 @@ class TestS3Connector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -308,7 +304,7 @@ class TestS3Connector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = S3Connector(1, "sc", 99)
+            sc = S3Connector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -342,7 +338,7 @@ class TestS3Connector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = S3Connector(1, "sc", 99)
+            sc = S3Connector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -444,7 +440,7 @@ class TestJdbcConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -506,7 +502,7 @@ class TestJdbcConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = JdbcConnector(1, "sc", 99)
+            sc = JdbcConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -540,7 +536,7 @@ class TestJdbcConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = JdbcConnector(1, "sc", 99)
+            sc = JdbcConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -686,7 +682,7 @@ class TestRedshiftConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -748,7 +744,7 @@ class TestRedshiftConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = RedshiftConnector(1, "sc", 99)
+            sc = RedshiftConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -782,7 +778,7 @@ class TestRedshiftConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = RedshiftConnector(1, "sc", 99)
+            sc = RedshiftConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -948,7 +944,7 @@ class TestAdlsConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -1010,7 +1006,7 @@ class TestAdlsConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = AdlsConnector(1, "sc", 99)
+            sc = AdlsConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -1044,7 +1040,7 @@ class TestAdlsConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = AdlsConnector(1, "sc", 99)
+            sc = AdlsConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -1190,7 +1186,7 @@ class TestSnowflakeConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -1252,7 +1248,7 @@ class TestSnowflakeConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = SnowflakeConnector(1, "sc", 99)
+            sc = SnowflakeConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -1286,7 +1282,7 @@ class TestSnowflakeConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = SnowflakeConnector(1, "sc", 99)
+            sc = SnowflakeConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -1403,7 +1399,7 @@ class TestKafkaConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -1468,7 +1464,7 @@ class TestKafkaConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = KafkaConnector(1, "sc", 99)
+            sc = KafkaConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -1502,7 +1498,7 @@ class TestKafkaConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = KafkaConnector(1, "sc", 99)
+            sc = KafkaConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -1643,7 +1639,6 @@ class TestKafkaConnector(unittest.TestCase):
         self.assertEqual("test", spark_options["kafka.bootstrap.servers"])
 
 
-# todo GCS must have description while others dont
 class TestGcsConnector(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1657,7 +1652,7 @@ class TestGcsConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -1720,7 +1715,7 @@ class TestGcsConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = GcsConnector(1, "sc", "test", 99)
+            sc = GcsConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -1754,7 +1749,7 @@ class TestGcsConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = GcsConnector(1, "sc", "test", 99)
+            sc = GcsConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
@@ -1855,7 +1850,7 @@ class TestBigQueryConnector(unittest.TestCase):
 
             # Initializes client
             client.init(
-                "external",
+                client_type="external",
                 host="1",
                 port=1,
                 project="2",
@@ -1917,7 +1912,7 @@ class TestBigQueryConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = BigQueryConnector(1, "sc", 99)
+            sc = BigQueryConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 200
             json = {
                 "type": "",
@@ -1951,7 +1946,7 @@ class TestBigQueryConnector(unittest.TestCase):
             Session, "send"
         ) as mock_send:  # Session class patched to avoid communication to API
             # Arrange
-            sc = BigQueryConnector(1, "sc", 99)
+            sc = BigQueryConnector(id=1, name="sc", featurestore_id=99)
             mock_send.return_value.status_code = 400
 
             storageConnectorApi = StorageConnectorApi(1)
