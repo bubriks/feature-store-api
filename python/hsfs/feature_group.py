@@ -24,7 +24,7 @@ import great_expectations as ge
 import avro.schema
 from typing import Optional, Union, Any, Dict, List, TypeVar
 
-from hsfs import util, engine, feature, user, storage_connector as sc
+from python.hsfs import util, engine, feature, user, storage_connector as sc
 from hsfs.core import (
     feature_group_engine,
     great_expectation_engine,

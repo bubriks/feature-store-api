@@ -14,7 +14,7 @@
 #   limitations under the License.
 #
 
-from hsfs import (
+from python.hsfs import (
     client,
     feature_view,
     transformation_function_attached,
