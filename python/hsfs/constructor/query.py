@@ -23,6 +23,7 @@ from hsfs.core import query_constructor_api, storage_connector_api
 from hsfs.constructor import join
 from hsfs.constructor.filter import Filter, Logic
 
+
 class Query:
     def __init__(
         self,
