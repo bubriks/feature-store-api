@@ -1204,7 +1204,8 @@ class Engine:
 
         config = storage_connector.spark_options()
         config.update(write_options)
-        print(f"pyspark: {config}")
+        config["kafka.ssl.providers"] = "legacy"
+        print(f"pyspark 1: {config}")
         return config
 
     @staticmethod
