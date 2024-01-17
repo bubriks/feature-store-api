@@ -1204,6 +1204,7 @@ class Engine:
 
         config = storage_connector.spark_options()
         config.update(write_options)
+        print(f"pyspark: {config}")
         return config
 
     @staticmethod

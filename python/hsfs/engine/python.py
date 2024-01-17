@@ -1184,6 +1184,7 @@ class Engine:
 
         config = storage_connector.confluent_options()
         config.update(write_options.get("kafka_producer_config", {}))
+        print(f"python: {config}")
         return config
 
     @staticmethod
