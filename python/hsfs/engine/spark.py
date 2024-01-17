@@ -333,12 +333,13 @@ class Engine:
         write_options = self._get_kafka_config(
             feature_group.feature_store_id, write_options
         )
+
         serialized_df = self._online_fg_to_avro(
             feature_group, self._encode_complex_features(feature_group, dataframe)
         )
 
-        project_id = str(feature_group.feature_store.project_id)
-        feature_group_id = str(feature_group._id)
+        project_id = str(feature_group.feature_store.project_id).encode("utf8")
+        feature_group_id = str(feature_group._id).encode("utf8")
         subject_id = str(feature_group.subject["id"]).encode("utf8")
 
         if query_name is None:
@@ -353,32 +354,19 @@ class Engine:
                 array(
                     struct(
                         lit("projectId").alias("key"),
-                        lit(project_id.encode("utf8")).alias("value"),
+                        lit(project_id).alias("value"),
                     ),
                     struct(
                         lit("featureGroupId").alias("key"),
-                        lit(feature_group_id.encode("utf8")).alias("value"),
+                        lit(feature_group_id).alias("value"),
                     ),
                     struct(
                         lit("subjectId").alias("key"), lit(subject_id).alias("value")
                     ),
                 ),
             )
-            .writeStream.outputMode(output_mode)
-            .format(self.KAFKA_FORMAT)
-            .option(
-                "checkpointLocation",
-                "/Projects/"
-                + client.get_instance()._project_name
-                + "/Resources/"
-                + query_name
-                + "-checkpoint"
-                if checkpoint_dir is None
-                else checkpoint_dir,
-            )
-            .options(**write_options)
+            .write.format(self.KAFKA_FORMAT).options(**write_options)
             .option("topic", feature_group._online_topic_name)
-            .queryName(query_name)
             .start()
         )
 
