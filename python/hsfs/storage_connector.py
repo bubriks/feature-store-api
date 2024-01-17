@@ -1018,6 +1018,8 @@ class KafkaConnector(StorageConnector):
         if self._ssl_key_password is not None:
             config["ssl.key.password"] = self._ssl_key_password
 
+        config["ssl.providers"] = "legacy"
+
         if self._external_kafka:
             warnings.warn(
                 "Getting connection details to externally managed Kafka cluster. "
