@@ -111,6 +111,7 @@ class Engine:
 
         self._spark_session.conf.set("hive.exec.dynamic.partition", "true")
         self._spark_session.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
+        # Needed to read Hudi COPY_ON_WRITE tables (https://hudi.apache.org/docs/0.5.2/querying_data/#spark-sql)
         self._spark_session.conf.set(
             "spark.hadoop.mapreduce.input.pathFilter.class",
             "org.apache.hudi.hadoop.HoodieROTablePathFilter",
