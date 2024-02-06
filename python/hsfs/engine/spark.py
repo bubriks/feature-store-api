@@ -111,6 +111,7 @@ class Engine:
 
         self._spark_session.conf.set("hive.exec.dynamic.partition", "true")
         self._spark_session.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
+        self._spark_session.conf.set("spark.hadoop.mapreduce.input.pathFilter.class", "org.apache.hudi.hadoop.HoodieROTablePathFilter")
         self._spark_session.conf.set("spark.sql.session.timeZone", "UTC")
 
         if importlib.util.find_spec("pydoop"):
