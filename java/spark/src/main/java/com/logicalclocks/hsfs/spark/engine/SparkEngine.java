@@ -154,8 +154,8 @@ public class SparkEngine extends EngineBase {
     // Configure the Spark context to allow dynamic partitions
     sparkSession.conf().set("hive.exec.dynamic.partition", "true");
     sparkSession.conf().set("hive.exec.dynamic.partition.mode", "nonstrict");
-    // force Spark to fallback to using the Hive Serde to read Hudi COPY_ON_WRITE tables
-    sparkSession.conf().set("spark.sql.hive.convertMetastoreParquet", "false");
+    // https://hudi.apache.org/docs/sql_queries#hive
+    sparkSession.conf().set("hive.input.format", "org.apache.hudi.hadoop.hive.HoodieCombineHiveInputFormat");
     sparkSession.conf().set("spark.sql.session.timeZone", "UTC");
   }
 

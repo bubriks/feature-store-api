@@ -111,7 +111,8 @@ class Engine:
 
         self._spark_session.conf.set("hive.exec.dynamic.partition", "true")
         self._spark_session.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
-        self._spark_session.conf.set("spark.sql.hive.convertMetastoreParquet", "false")
+        # https://hudi.apache.org/docs/sql_queries#hive
+        self._spark_session.conf.set("hive.input.format", "org.apache.hudi.hadoop.hive.HoodieCombineHiveInputFormat")
         self._spark_session.conf.set("spark.sql.session.timeZone", "UTC")
 
         if importlib.util.find_spec("pydoop"):
