@@ -111,9 +111,11 @@ class Engine:
 
         self._spark_session.conf.set("hive.exec.dynamic.partition", "true")
         self._spark_session.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
-        # https://hudi.apache.org/docs/sql_queries#hive
-        self._spark_session.conf.set("hive.input.format", "org.apache.hudi.hadoop.hive.HoodieCombineHiveInputFormat")
-        self._spark_session.conf.set("hive.tez.input.format", "org.apache.hadoop.hive.ql.io.HiveInputFormat")
+        # https://hudi.apache.org/docs/0.12.1/querying_data/#spark-sql
+        self._spark_session.conf.set(
+            "spark.hadoop.mapreduce.input.pathFilter.class",
+            "org.apache.hudi.hadoop.HoodieROTablePathFilter"
+        )
         self._spark_session.conf.set("spark.sql.session.timeZone", "UTC")
 
         if importlib.util.find_spec("pydoop"):
