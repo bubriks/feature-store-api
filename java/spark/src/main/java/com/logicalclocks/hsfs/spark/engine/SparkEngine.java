@@ -156,6 +156,7 @@ public class SparkEngine extends EngineBase {
     sparkSession.conf().set("hive.exec.dynamic.partition.mode", "nonstrict");
     // https://hudi.apache.org/docs/sql_queries#hive
     sparkSession.conf().set("hive.input.format", "org.apache.hudi.hadoop.hive.HoodieCombineHiveInputFormat");
+    sparkSession.conf().set("hive.tez.input.format", "org.apache.hadoop.hive.ql.io.HiveInputFormat");
     sparkSession.conf().set("spark.sql.session.timeZone", "UTC");
   }
 
