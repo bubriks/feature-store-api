@@ -791,7 +791,7 @@ class FeatureViewEngine:
         For inaccessible models, only a minimal information is returned.
 
         # Arguments
-            feature_view_instance: Metadata object of feature view.
+            feature_view_obj: Metadata object of feature view.
 
         # Returns
             `ProvenanceLinks`:  the models generated using this feature group

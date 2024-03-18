@@ -264,7 +264,8 @@ class FeatureViewApi:
         returned.
 
         # Arguments
-            feature_view_instance: Metadata object of feature view.
+            name: Name of the feature view.
+            version: Version of the feature view.
 
         # Returns
             `ExplicitProvenance.Links`: the feature groups used to generated this
@@ -298,7 +299,8 @@ class FeatureViewApi:
         For inaccessible models, only a minimal information is returned.
 
         # Arguments
-            feature_view_instance: Metadata object of feature view.
+            name: Name of the feature view.
+            version: Version of the feature view.
 
         # Returns
             `ExplicitProvenance.Links`: the models generated using this feature
